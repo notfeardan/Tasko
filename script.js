@@ -8,6 +8,8 @@ const progressList = document.getElementById("progress-list");
 const completeList = document.getElementById("complete-list");
 const onHoldList = document.getElementById("on-hold-list");
 
+let updateOnLoad = false;
+
 let backlogListArray = [];
 let progressListArray = [];
 let completeListArray = [];
@@ -24,12 +26,9 @@ function getSavedColumns() {
     backlogListArray = ["Release the course", "Do some coding"];
     progressListArray = ["Work on projects", "20 Commits"];
     completeListArray = ["CSS Bootcamp", "JS Project"];
-    onHoldListArray = ["Review this"];
+    onHoldListArray = ["Review Code"];
   }
 }
-
-getSavedColumns();
-updateSavedColumns();
 
 function updateSavedColumns() {
   listArrays = [
@@ -38,7 +37,7 @@ function updateSavedColumns() {
     completeListArray,
     onHoldListArray,
   ];
-  const arrayNames = ["backlog", "progress", "complete", "onhold"];
+  const arrayNames = ["backlog", "progress", "complete", "onHold"];
   arrayNames.foreach((arrayName, index) => {
     localStorage.setItem(
       `${arrayName}Items`,
@@ -48,13 +47,32 @@ function updateSavedColumns() {
 }
 
 function createItemEl(columnEl, column, item, index) {
-  console.log("columnEl:", columnEl);
-  console.log("column:", column);
-  console.log("item:", item);
-  console.log("index:", index);
-  // List Item
   const listEl = document.createElement("li");
   listEl.classList.add("drag-item");
+  listEl.textContent = item;
+  columnEl.appendChild(listEl);
 }
 
-function updateDOM() {}
+function updateDOM() {
+  if (!updateOnLoad) {
+    getSavedColumns();
+  }
+  backlogList.textContent = "";
+  backlogListArray.forEach((backLogItem, index) => {
+    createItemEl(backlogList, 0, backLogItem, index);
+  });
+  progressList.textContent = "";
+  progressListArray.forEach((progressItem, index) => {
+    createItemEl(progressList, 0, progressItem, index);
+  });
+  completeList.textContent = "";
+  completeListArray.forEach((completeItem, index) => {
+    createItemEl(completeList, 0, completeItem, index);
+  });
+  onHoldList.textContent = "";
+  onHoldListArray.forEach((onHoldItem, index) => {
+    createItemEl(onHoldList, 0, onHoldItem, index);
+  });
+}
+
+updateDOM();
