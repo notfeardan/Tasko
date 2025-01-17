@@ -12,6 +12,7 @@ let backlogListArray = [];
 let progressListArray = [];
 let completeListArray = [];
 let onHoldListArray = [];
+let listArrays = [];
 
 function getSavedColumns() {
   if (localStorage.getItem("backlogItems")) {
@@ -20,18 +21,30 @@ function getSavedColumns() {
     completeListArray = JSON.parse(localStorage.completeItems);
     onHoldListArray = JSON.parse(localStorage.onHoldItems);
   } else {
-    backlogListArray = ["Release the course", "Sit back and relax"];
-    progressListArray = ["Work on projects", "Listen to music"];
-    completeListArray = ["Being cool", "Getting stuff done"];
-    onHoldListArray = ["Being uncool"];
+    backlogListArray = ["Release the course", "Do some coding"];
+    progressListArray = ["Work on projects", "20 Commits"];
+    completeListArray = ["CSS Bootcamp", "JS Project"];
+    onHoldListArray = ["Review this"];
   }
 }
 
+getSavedColumns();
+updateSavedColumns();
+
 function updateSavedColumns() {
-  localStorage.setItem("backlogItems", JSON.stringify(backlogListArray));
-  localStorage.setItem("progressItems", JSON.stringify(progressListArray));
-  localStorage.setItem("completeItems", JSON.stringify(completeListArray));
-  localStorage.setItem("onHoldItems", JSON.stringify(onHoldListArray));
+  listArrays = [
+    backlogListArray,
+    progressListArray,
+    completeListArray,
+    onHoldListArray,
+  ];
+  const arrayNames = ["backlog", "progress", "complete", "onhold"];
+  arrayNames.foreach((arrayName, index) => {
+    localStorage.setItem(
+      `${arrayName}Items`,
+      JSON.stringify(listArrays[index])
+    );
+  });
 }
 
 function createItemEl(columnEl, column, item, index) {
