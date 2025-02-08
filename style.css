@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Quicksand&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
 
 html {
   box-sizing: border-box;
@@ -18,7 +18,7 @@ body {
   background-position: 50% 60%;
   background-attachment: fixed;
   color: white;
-  font-family: Quicksand, sans-serif;
+  font-family: "Poppins", sans-serif;
   overflow-y: hidden;
 }
 
@@ -30,6 +30,40 @@ h1 {
 .main-title {
   text-align: center;
   font-size: 3rem;
+}
+
+.social-links {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.made-by {
+  color: white;
+  font-weight: 600;
+  text-shadow: 2px 2px 5px black;
+}
+
+.social-links a {
+  text-decoration: none;
+  color: white;
+  background-color: #0077b5;
+  padding: 8px 12px;
+  border-radius: 5px;
+  margin: 0;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.social-links a.github {
+  background-color: #24292e;
+}
+
+.social-links a:hover {
+  filter: brightness(85%);
 }
 
 ul {
